@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{index::menu-title}"></head>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin" >
+    <div class="layui-header">
+        <div class="layui-logo">车辆管理系统</div>
+
+    </div>
+        <div th:insert="~{index::menu-menu}"></div>
+    <div class="main-wrap">
+        <div class="crumb-wrap">
+            <div class="crumb-list"><i class="icon-font"></i><a th:href="index">首页</a><span class="crumb-step">&gt;</span><span class="crumb-name">车辆管理</span></div>
+        </div>
+        <div class="search-wrap">
+            <div class="search-content">
+                <form method="get" action="/carManage/carLists">
+                    <table class="search-tab">
+                        <tr>
+                            <th width="70">车号:</th>
+                            <td><input class="common-text" placeholder="车号" id="carNumber" name="carNumber" type="text" style="text-transform:uppercase;" th:value="${searchKey}"></td>
+                            <td><input class="btn btn-primary btn2" name="sub" value="查询" type="submit"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <div class="result-wrap">
+            <div class="result-title">
+                <div class="result-list">
+                    <input class="common-text" id="carnumber" name="carnumber" size="20" type="text" style="text-transform:uppercase;">
+                    <button onclick="addCar()" class="btn btn-primary">添加车辆</button>
+                </div>
+            </div>
+
+            <form name="myform" id="myform" method="post" action="/carManage/carLists">
+
+                <div class="result-content">
+                    <table class="result-tab" width="100%">
+                        <thead>
+                        <tr>
+                            <th>车牌</th>
+                            <th>司机姓名</th>
+                            <th>司机电话</th>
+                            <th>司机住址</th>
+                            <th>司机身份证号</th>
+                            <th>操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-12 search-collapse">
+        <form id="formId">
+            <div class="select-list">
+                <ul>
+                    <li>
+                        <label>车辆号码：</label>
+                        <input type="text" name="carNumber"/>
+                    </li>
+                    <li>
+                        <label>驾驶人：</label>
+                        <input type="text" name="carDriver"/>
+                    </li>
+                    <li>
+                        <label>驾驶人电话：</label>
+                        <input type="text" name="carDriverPhone"/>
+                    </li>
+                    <li>
+                        <label>驾驶人地址：</label>
+                        <input type="text" name="carDriverAddress"/>
+                    </li>
+                    <li>
+                        <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+                        <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <!--/main-->
+</div>
+
+</body>
+<script >
+    //JavaScript代码区域
+    layui.use('element', function(){
+        var element = layui.element;
+
+    });
+</script>
+<!--<script>-->
+
+<!--    function addCar() {-->
+<!--        var carn = $("#carn").val();-->
+<!--        var carnumber = $("#carnumber").val();-->
+<!--        var licensePlateAreaName=$("#carn").find("option:selected").text();-->
+
+<!--        var car = {-->
+<!--            carNumber:carnumber.toUpperCase(),carLicensePlateAreaCode:carn,licensePlateAreaName:licensePlateAreaName-->
+<!--        }-->
+<!--        $.ajax({-->
+
+<!--            type:"post",-->
+<!--            url:"/carManage/addCar",-->
+<!--            datatype:"json",-->
+<!--            data:{car:JSON.stringify(car)},-->
+<!--            success:function(data){-->
+<!--                // alert(data) ;-->
+<!--                location="[[@{/carManage/carLists}]]";-->
+<!--            }-->
+<!--        });-->
+
+<!--    }-->
+<!--</script>-->
+</html>
